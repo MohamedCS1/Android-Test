@@ -14,9 +14,9 @@ import dagger.hilt.components.SingletonComponent
 object UseCaseModule {
 
     @Provides
-    fun provideGetRemoteTrendingMoviesUseCase(moviesRepository: MoviesRepository):GetRemoteTrendingMovies
+    fun provideGetRemoteTrendingMoviesUseCase(moviesRepository: MoviesRepository ,apiKey:String):GetRemoteTrendingMovies
     {
-        return GetRemoteTrendingMovies(moviesRepository)
+        return GetRemoteTrendingMovies(moviesRepository ,apiKey)
     }
 
     @Provides
