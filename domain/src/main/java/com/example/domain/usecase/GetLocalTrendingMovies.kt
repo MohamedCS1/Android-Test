@@ -1,4 +1,7 @@
 package com.example.domain.usecase
 
-class GetLocalTrendingMovies {
+import com.example.domain.repository.MoviesRepository
+
+class GetLocalTrendingMovies(private val moviesRepository: MoviesRepository) {
+    suspend operator fun invoke() = moviesRepository.getLocalTrendingMovies()
 }
