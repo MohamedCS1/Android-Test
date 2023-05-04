@@ -1,7 +1,7 @@
 package com.example.androidtest.di
 
 import com.example.domain.repository.MoviesRepository
-import com.example.domain.usecase.CacheMovie
+import com.example.domain.usecase.CacheTrendingMovie
 import com.example.domain.usecase.GetLocalTrendingMovies
 import com.example.domain.usecase.GetRemoteTrendingMovies
 import dagger.Module
@@ -26,9 +26,9 @@ object UseCaseModule {
     }
 
     @Provides
-    fun provideCacheMovieUseCase(moviesRepository: MoviesRepository): CacheMovie
+    fun provideCacheMovieUseCase(moviesRepository: MoviesRepository): CacheTrendingMovie
     {
-        return CacheMovie(moviesRepository)
+        return CacheTrendingMovie(moviesRepository)
     }
 
 }
