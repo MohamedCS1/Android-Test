@@ -21,9 +21,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 @InstallIn(SingletonComponent::class)
 object RepositoriesModule {
     @Provides
-    fun provideRemoteTrendingMovieRepository(apiService: ApiService ,@ApiKey apiKey:String):TrendingMoviesRemoteDataSource
+    fun provideRemoteTrendingMovieRepository(apiService: ApiService):TrendingMoviesRemoteDataSource
     {
-        return TrendingMoviesRemoteDataSourceImpl(apiService ,apiKey)
+        return TrendingMoviesRemoteDataSourceImpl(apiService)
     }
 
     @Provides

@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/radius_background"
+    android:padding="@dimen/_5sdp"
     android:layout_margin="@dimen/_5sdp">
 
     <ImageView
@@ -11,7 +13,7 @@
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_120sdp"
         android:layout_marginTop="@dimen/_2sdp"
-        android:layout_marginBottom="@dimen/_2sdp"
+        android:layout_margin="@dimen/_2sdp"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +24,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_10sdp"
-        android:text="Null"
+        android:text="@string/nothing"
         android:textColor="@color/black"
         android:textSize="@dimen/_15ssp"
         android:textStyle="bold"
@@ -34,28 +36,24 @@
         android:id="@+id/textViewReleaseDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Null"
+        android:layout_margin="@dimen/_10sdp"
+        android:text="@string/nothing"
         android:textColor="#A1A1A1"
         android:textSize="@dimen/_12ssp"
         android:textStyle="italic"
-        android:layout_margin="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@+id/starsAverage"
         app:layout_constraintStart_toEndOf="@+id/imageViewPoster"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 
-    <ProgressBar
-        android:id="@+id/progressVoteAverage"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/starsAverage"
+        android:layout_width="243dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:progress="0"
+        android:text="⭐ 0.0/10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/imageViewPoster"
-        app:layout_constraintTop_toBottomOf="@+id/textViewReleaseDate"
-        app:layout_constraintVertical_bias="0.63" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 
     <TextView
         android:id="@+id/textViewUserScore"
@@ -68,19 +66,19 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressVoteAverage" />
+        app:layout_constraintTop_toBottomOf="@+id/starsAverage" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewPopularity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_10sdp"
-        android:text="User score"
+        android:text="@string/nothing"
         android:textColor="@color/black"
         android:textSize="@dimen/_10ssp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageViewPoster"
-        app:layout_constraintTop_toBottomOf="@+id/progressVoteAverage" />
+        app:layout_constraintTop_toBottomOf="@+id/starsAverage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

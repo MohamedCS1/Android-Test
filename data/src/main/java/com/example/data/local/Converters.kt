@@ -3,6 +3,8 @@ package com.example.data.local
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.room.TypeConverter
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.io.ByteArrayOutputStream
 
 class Converters {
@@ -18,4 +20,14 @@ class Converters {
         return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
     }
 
+    @TypeConverter
+    fun fromIntList(intList: List<Int>): String {
+        return Gson().toJson(intList)
+    }
+
+    @TypeConverter
+    fun toIntList(intListString: String): List<Int> {
+        val type = object : TypeToken<List<Int>>() {}.type
+        return Gson().fromJson(intListString, type)
+    }
 }

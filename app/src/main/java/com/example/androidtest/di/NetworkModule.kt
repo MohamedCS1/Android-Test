@@ -1,5 +1,6 @@
 package com.example.androidtest.di
 
+import com.example.androidtest.BuildConfig
 import com.example.data.remote.ApiService
 import dagger.Module
 import dagger.Provides
@@ -15,8 +16,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    final val BASE_URL= "https://api.themoviedb.org/3/"
-
     @Provides
     @Singleton
     fun provideOkHttp():OkHttpClient
@@ -29,7 +28,7 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient):Retrofit
     {
-        return Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient).addConverterFactory(
+        return Retrofit.Builder().baseUrl(BuildConfig.BASE_URL).client(okHttpClient).addConverterFactory(
             GsonConverterFactory.create()).build()
     }
 

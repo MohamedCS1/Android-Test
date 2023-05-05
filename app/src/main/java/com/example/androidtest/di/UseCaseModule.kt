@@ -8,15 +8,16 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Named
 
 @Module
 @InstallIn(SingletonComponent::class)
 object UseCaseModule {
 
     @Provides
-    fun provideGetRemoteTrendingMoviesUseCase(moviesRepository: MoviesRepository ,apiKey:String):GetRemoteTrendingMovies
+    fun provideGetRemoteTrendingMoviesUseCase(moviesRepository: MoviesRepository):GetRemoteTrendingMovies
     {
-        return GetRemoteTrendingMovies(moviesRepository ,apiKey)
+        return GetRemoteTrendingMovies(moviesRepository)
     }
 
     @Provides
