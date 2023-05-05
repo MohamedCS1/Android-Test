@@ -1,26 +1,24 @@
-package com.example.androidtest.presentation
+package com.example.androidtest.presentation.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidtest.BuildConfig
-import com.example.androidtest.R
 import com.example.androidtest.databinding.ActivityMainBinding
+import com.example.androidtest.util.BitmapUtil.getBitmap
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val mainViewModel:MainViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
 
     lateinit var binding:ActivityMainBinding
     lateinit var moviesAdapter: MoviesAdapter
@@ -44,6 +42,14 @@ class MainActivity : AppCompatActivity() {
                 else
                 {
                     moviesAdapter.submitTrendingMoviesResponse(trendingMoviesResponse)
+
+                    trendingMoviesResponse.results?.forEach {
+                        movie ->
+                        val moviePoster = async {getBitmap(this@MainActivity ,"https://image.tmdb.org/t/p/original/${movie.poster_path}"?:"")}
+                        mainViewModel.insertTrendingMovie(movie.copy(bitMapPoster = moviePoster.await()))
+                        binding.progressLoading.visibility = View.INVISIBLE
+                    }
+
                 }
             }
         }

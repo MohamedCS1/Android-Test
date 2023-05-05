@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 import com.example.domain.models.trendingMovies.Movie
 
 
-@Database(entities = [Movie::class] , version = 4 , exportSchema = true)
+@Database(entities = [Movie::class] , version = 5 , exportSchema = true)
 @TypeConverters(Converters::class)
 abstract class MoviesDatabase:RoomDatabase() {
     abstract fun moviesDao():MoviesDao

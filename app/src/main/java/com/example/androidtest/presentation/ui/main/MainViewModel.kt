@@ -1,4 +1,4 @@
-package com.example.androidtest.presentation
+package com.example.androidtest.presentation.ui.main
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
