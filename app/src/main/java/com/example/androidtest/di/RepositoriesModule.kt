@@ -1,15 +1,10 @@
 package com.example.androidtest.di
 
-import com.example.data.local.MoviesDao
+import com.example.data.local.moviesDetail.MovieDetailDao
+import com.example.data.local.movies.MoviesDao
 import com.example.data.remote.ApiService
-import com.example.data.repository.CacheTrendingMovieImpl
-import com.example.data.repository.MoviesRepositoryImpl
-import com.example.data.repository.TrendingMoviesLocalDataSourceImpl
-import com.example.data.repository.TrendingMoviesRemoteDataSourceImpl
-import com.example.domain.repository.CacheTrendingMovie
-import com.example.domain.repository.MoviesRepository
-import com.example.domain.repository.TrendingMoviesLocalDataSource
-import com.example.domain.repository.TrendingMoviesRemoteDataSource
+import com.example.data.repository.*
+import com.example.domain.repository.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,8 +34,26 @@ object RepositoriesModule {
     }
 
     @Provides
-    fun provideMoviesRepository(trendingMoviesRemoteDataSource: TrendingMoviesRemoteDataSource, trendingMoviesLocalDataSource: TrendingMoviesLocalDataSource, cacheTrendingMovie: CacheTrendingMovie):MoviesRepository
+    fun provideCacheDetailTrendingMovie(movieDetailDao: MovieDetailDao, dispatcher: CoroutineDispatcher):CacheDetailTrendingMovie
     {
-        return MoviesRepositoryImpl(trendingMoviesRemoteDataSource, trendingMoviesLocalDataSource, cacheTrendingMovie)
+        return CacheDetailTrendingMovieImpl(movieDetailDao ,dispatcher)
+    }
+
+    @Provides
+    fun provideRemoteDetailTrendingMovieRepository(apiService: ApiService): TrendingMovieDetailRemoteDataSource
+    {
+        return TrendingMovieDetailRemoteDataSourceImpl(apiService)
+    }
+
+    @Provides
+    fun provideLocalDetailTrendingMovieRepository(movieDetailDao: MovieDetailDao, dispatcher: CoroutineDispatcher):TrendingMovieDetailLocalDataSource
+    {
+        return TrendingMovieDetailLocalDataSourceImpl(movieDetailDao ,dispatcher)
+    }
+
+    @Provides
+    fun provideMoviesRepository(trendingMoviesRemoteDataSource: TrendingMoviesRemoteDataSource, trendingMoviesLocalDataSource: TrendingMoviesLocalDataSource, cacheTrendingMovie: CacheTrendingMovie ,trendingMovieDetailLocalDataSource: TrendingMovieDetailLocalDataSource  ,trendingMovieDetailRemoteDataSource: TrendingMovieDetailRemoteDataSource ,cacheDetailTrendingMovie: CacheDetailTrendingMovie):MoviesRepository
+    {
+        return MoviesRepositoryImpl(trendingMoviesRemoteDataSource, trendingMoviesLocalDataSource, cacheTrendingMovie ,trendingMovieDetailRemoteDataSource ,trendingMovieDetailLocalDataSource ,cacheDetailTrendingMovie)
     }
 }

@@ -1,6 +1,6 @@
 package com.example.data.repository
 
-import com.example.data.local.MoviesDao
+import com.example.data.local.movies.MoviesDao
 import com.example.domain.models.trendingMovies.Movie
 import com.example.domain.repository.TrendingMoviesLocalDataSource
 import kotlinx.coroutines.CoroutineDispatcher

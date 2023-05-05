@@ -9,13 +9,16 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.androidtest.databinding.CardMovieBinding
 import com.example.domain.models.trendingMovies.TrendingMoviesResponse
+import javax.inject.Inject
 
 class MoviesAdapter:RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
 
-    private var trendingMoviesResponse:TrendingMoviesResponse = TrendingMoviesResponse(null ,null ,null ,null)
+
+    private var trendingMoviesResponse:TrendingMoviesResponse = TrendingMoviesResponse()
     private lateinit var context: Context
 
-
+    @Inject
+    lateinit var onMovieClickListener: OnMovieClickListiner
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         context = parent.context
         return MovieViewHolder(CardMovieBinding.inflate(LayoutInflater.from(parent.context) ,parent ,false))
@@ -37,6 +40,9 @@ class MoviesAdapter:RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
                 Glide.with(context).load("https://image.tmdb.org/t/p/original/$poster_path").apply(
                     RequestOptions.bitmapTransform(RoundedCorners(25))).into(binding.imageViewPoster)
             }
+            holder.itemView.setOnClickListener {
+                onMovieClickListener.onMovieClick(itemView , trendingMoviesResponse.results!![position])
+            }
         }
     }
 
@@ -48,4 +54,8 @@ class MoviesAdapter:RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
         notifyDataSetChanged()
     }
 
+    fun onMovieClick(onMovieClickListener: OnMovieClickListiner)
+    {
+        this.onMovieClickListener = onMovieClickListener
+    }
 }

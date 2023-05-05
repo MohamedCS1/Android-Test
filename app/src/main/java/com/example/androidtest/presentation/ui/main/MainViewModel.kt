@@ -10,6 +10,7 @@ import com.example.domain.usecase.GetLocalTrendingMovies
 import com.example.domain.usecase.GetRemoteTrendingMovies
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,7 +19,7 @@ class MainViewModel @Inject constructor(private val getRemoteTrendingMovies: Get
 
     private val _trendingMovies:MutableStateFlow<TrendingMoviesResponse?> = MutableStateFlow(null)
 
-    val trendingMovies: MutableStateFlow<TrendingMoviesResponse?> = _trendingMovies
+    val trendingMovies: StateFlow<TrendingMoviesResponse?> = _trendingMovies
 
     fun getTrendingMovies(apiKey:String)
     {
@@ -27,8 +28,7 @@ class MainViewModel @Inject constructor(private val getRemoteTrendingMovies: Get
                 _trendingMovies.value = getRemoteTrendingMovies(apiKey)
             }catch (ex:Exception)
             {
-                Log.d("Exception" ,ex.stackTraceToString())
-//                _trendingMovies.value =  TrendingMoviesResponse(results = getLocalTrendingMovies())
+                _trendingMovies.value =  TrendingMoviesResponse(results = getLocalTrendingMovies())
             }
 
         }

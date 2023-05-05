@@ -11,5 +11,5 @@ interface ApiService {
     suspend fun getTrendingMovies(@Query("api_key") apiKey:String):TrendingMoviesResponse
 
     @GET("movie/{movie_id}")
-    fun getMovieDetailsById(@Path("movie_id") id:Int, @Query("api_key") apiKey:String ):DetailMovieResponse
+    suspend fun getMovieDetailsById(@Path("movie_id") movieId:Long, @Query("api_key") apiKey:String ):DetailMovieResponse
 }
