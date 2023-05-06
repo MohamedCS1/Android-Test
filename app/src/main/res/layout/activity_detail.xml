@@ -118,7 +118,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Overview"
+                android:text="@string/overview"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_gravity="center"
@@ -160,11 +160,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Status : "
+                    android:text="@string/status"
                     android:paddingStart="@dimen/_10sdp"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12ssp"
-                    android:padding="@dimen/_5sdp"
                     />
 
                 <TextView
@@ -189,20 +188,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Original Language : "
+                    android:text="@string/original_language"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12ssp"
                     android:paddingStart="@dimen/_10sdp"
                     />
+
                 <TextView
                     android:id="@+id/textViewOriginalLanguage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="@dimen/_10sdp"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
-                    android:padding="@dimen/_5sdp"
-                    />
+                    android:textSize="@dimen/_12ssp" />
             </LinearLayout>
 
         </LinearLayout>

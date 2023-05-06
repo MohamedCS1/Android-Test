@@ -8,7 +8,7 @@ import com.example.domain.models.detailMovie.*
 
 
 
-@Database(entities = [DetailMovieResponse::class] , version = 10 , exportSchema = true)
+@Database(entities = [DetailMovieResponse::class] , version = 11 , exportSchema = true)
 @TypeConverters(Converters::class)
 abstract class MoviesDetailDatabase: RoomDatabase() {
     abstract fun moviesDetailDao(): MovieDetailDao

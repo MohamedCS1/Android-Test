@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">AndroidTest</string>
     <string name="nothing">Null</string>
+    <string name="status">Status :</string>
+    <string name="original_language">Original Language:</string>
+    <string name="overview">Overview</string>
 </resources>

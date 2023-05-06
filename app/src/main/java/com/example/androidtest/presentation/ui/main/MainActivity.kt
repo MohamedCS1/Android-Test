@@ -1,25 +1,21 @@
 package com.example.androidtest.presentation.ui.main
 
 import android.annotation.SuppressLint
-import android.app.ActivityOptions
 import android.content.Intent
 import android.database.CursorWindow
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidtest.BuildConfig
 import com.example.androidtest.databinding.ActivityMainBinding
 import com.example.androidtest.presentation.ui.detail.DetailActivity
-import com.example.androidtest.util.BitmapUtil.getBitmap
-import com.example.androidtest.util.DataSource
+
 import com.example.domain.models.trendingMovies.Movie
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.lang.reflect.Field
 
@@ -34,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("DiscouragedPrivateApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -52,23 +49,16 @@ class MainActivity : AppCompatActivity() {
 
                     trendingMoviesResponse?.results?.forEach {
                         movie ->
-                        val moviePoster = async {getBitmap(this@MainActivity ,"https://image.tmdb.org/t/p/original/${movie.poster_path}"?:"")}
-                        mainViewModel.insertTrendingMovie(movie.copy(bitMapPoster = moviePoster.await()))
+                        mainViewModel.insertTrendingMovie(movie)
                         binding.progressLoading.visibility = View.INVISIBLE
                     }
 
             }
         }
 
-        lifecycleScope.launch {
-            mainViewModel.dataSource.collect{
-                moviesAdapter.setDataSource(it)
-            }
-
-        }
 
         moviesAdapter.onMovieClick(object :OnMovieClickListener{
-            override fun onMovieClick(movie: Movie ,dataSource: DataSource) {
+            override fun onMovieClick(movie: Movie) {
                 val intent = Intent(this@MainActivity , DetailActivity::class.java)
                 intent.putExtra("movieId" ,movie.id.toLong())
                 startActivity(intent)

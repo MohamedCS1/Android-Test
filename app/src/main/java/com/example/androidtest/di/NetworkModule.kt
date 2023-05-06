@@ -15,7 +15,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-
+    private const val BASE_URL = "https://api.themoviedb.org/3/"
     @Provides
     @Singleton
     fun provideOkHttp():OkHttpClient
@@ -28,7 +28,7 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient):Retrofit
     {
-        return Retrofit.Builder().baseUrl(BuildConfig.BASE_URL).client(okHttpClient).addConverterFactory(
+        return Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient).addConverterFactory(
             GsonConverterFactory.create()).build()
     }
 

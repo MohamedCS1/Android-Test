@@ -8,7 +8,7 @@ import com.example.domain.models.detailMovie.*
 import com.example.domain.models.trendingMovies.Movie
 
 
-@Database(entities = [Movie::class], version = 9 , exportSchema = true)
+@Database(entities = [Movie::class], version = 10 , exportSchema = true)
 @TypeConverters(Converters::class)
 abstract class MoviesDatabase:RoomDatabase() {
     abstract fun moviesDao(): MoviesDao
