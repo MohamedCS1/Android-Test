@@ -10,6 +10,7 @@ import coil.request.SuccessResult
 object BitmapUtil {
     suspend fun getBitmap(context: Context, url:String): Bitmap
     {
+
         val loading = ImageLoader(context)
         val request = ImageRequest.Builder(context)
             .data(url)

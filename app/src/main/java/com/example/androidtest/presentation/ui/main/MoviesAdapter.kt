@@ -7,18 +7,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.example.androidtest.R
 import com.example.androidtest.databinding.CardMovieBinding
+import com.example.androidtest.util.DataSource
 import com.example.domain.models.trendingMovies.TrendingMoviesResponse
 import javax.inject.Inject
 
 class MoviesAdapter:RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
 
-
+    private var dataSource: DataSource = DataSource.Remote
     private var trendingMoviesResponse:TrendingMoviesResponse = TrendingMoviesResponse()
     private lateinit var context: Context
 
     @Inject
-    lateinit var onMovieClickListener: OnMovieClickListiner
+    lateinit var onMovieClickListener: OnMovieClickListener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         context = parent.context
         return MovieViewHolder(CardMovieBinding.inflate(LayoutInflater.from(parent.context) ,parent ,false))
@@ -37,11 +39,15 @@ class MoviesAdapter:RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
                 binding.starsAverage.text = "$vote_average/10"
                 binding.textViewReleaseDate.text = release_date
                 binding.textViewPopularity.text = popularity.toString()
-                Glide.with(context).load("https://image.tmdb.org/t/p/original/$poster_path").apply(
+                if (dataSource == DataSource.Local) Glide.with(context).load(bitMapPoster).placeholder(
+                        R.drawable.ic_no_image).apply(
+                        RequestOptions.bitmapTransform(RoundedCorners(25))).into(binding.imageViewPoster)
+                else Glide.with(context).load("https://image.tmdb.org/t/p/original/$poster_path").placeholder(
+                    R.drawable.ic_no_image).apply(
                     RequestOptions.bitmapTransform(RoundedCorners(25))).into(binding.imageViewPoster)
             }
             holder.itemView.setOnClickListener {
-                onMovieClickListener.onMovieClick(itemView , trendingMoviesResponse.results!![position])
+                onMovieClickListener.onMovieClick(trendingMoviesResponse.results!![position] ,dataSource)
             }
         }
     }
@@ -54,7 +60,12 @@ class MoviesAdapter:RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun onMovieClick(onMovieClickListener: OnMovieClickListiner)
+    fun setDataSource(dataSource: DataSource)
+    {
+        this.dataSource = dataSource
+    }
+
+    fun onMovieClick(onMovieClickListener: OnMovieClickListener)
     {
         this.onMovieClickListener = onMovieClickListener
     }

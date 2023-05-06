@@ -2,8 +2,10 @@ package com.example.androidtest.presentation.ui.detail
 
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.androidtest.util.DataSource
 import com.example.domain.models.detailMovie.DetailMovieResponse
 import com.example.domain.usecase.CacheDetailTrendingMovie
 import com.example.domain.usecase.GetLocalDetailTrendingMovie
@@ -21,6 +23,8 @@ class DetailViewModel @Inject constructor(private val getRemoteDetailTrendingMov
 
     val trendingMovieDetail: StateFlow<DetailMovieResponse?> = _trendingMovieDetail
 
+    val dataSource:MutableStateFlow<DataSource> = MutableStateFlow(DataSource.Remote)
+
     fun getTrendingMovieDetail(apiKey:String ,movieId:Long)
     {
         viewModelScope.launch {
@@ -28,8 +32,8 @@ class DetailViewModel @Inject constructor(private val getRemoteDetailTrendingMov
                 _trendingMovieDetail.value = getRemoteDetailTrendingMovies(apiKey ,movieId)
             }catch (ex:Exception)
             {
-                ex.stackTraceToString()
-                _trendingMovieDetail.value =  getLocalDetailTrendingMovies(movieId)
+                _trendingMovieDetail.value = getLocalDetailTrendingMovies(movieId)
+                dataSource.value = DataSource.Local
             }
 
         }

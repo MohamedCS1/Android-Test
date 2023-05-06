@@ -24,6 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"
+                android:src="@drawable/ic_no_image"
                 app:layout_collapseMode="parallax">
 
             </ImageView>
@@ -54,21 +55,70 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_10sdp"
             android:orientation="vertical">
-
             <TextView
                 android:id="@+id/textViewTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="@dimen/_15ssp"/>
+                android:layout_gravity="center"
+                android:textSize="@dimen/_12ssp"/>
+
+            <LinearLayout
+                android:id="@+id/LinearLayoutAverage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_margin="@dimen/_10sdp">
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/ic_star"/>
+                <TextView
+                    android:id="@+id/starsAverage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.0/10"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayoutPopularity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp">
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/ic_eyes"/>
+
+                <TextView
+                    android:id="@+id/textViewPopularity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:text="@string/nothing"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="overview"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Overview"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_gravity="center"
@@ -92,11 +142,11 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp"
-                android:padding="@dimen/_5sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
                 android:background="@drawable/radius_background"
                 android:backgroundTint="@color/gray"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
                 />
 
             <LinearLayout
@@ -104,25 +154,56 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/radius_background"
                 android:backgroundTint="@color/gray"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="status : "
+                    android:text="Status : "
+                    android:paddingStart="@dimen/_10sdp"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12ssp"
                     android:padding="@dimen/_5sdp"
                     />
+
                 <TextView
                     android:id="@+id/textViewStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/radius_background"
+                android:backgroundTint="@color/gray"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Original Language : "
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"
+                    android:paddingStart="@dimen/_10sdp"
+                    />
+                <TextView
+                    android:id="@+id/textViewOriginalLanguage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="@dimen/_10sdp"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12ssp"
                     android:padding="@dimen/_5sdp"
                     />
             </LinearLayout>
-
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

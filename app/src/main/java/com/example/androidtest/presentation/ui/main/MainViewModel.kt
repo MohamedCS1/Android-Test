@@ -1,8 +1,8 @@
 package com.example.androidtest.presentation.ui.main
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.androidtest.util.DataSource
 import com.example.domain.models.trendingMovies.Movie
 import com.example.domain.models.trendingMovies.TrendingMoviesResponse
 import com.example.domain.usecase.CacheTrendingMovie
@@ -19,8 +19,9 @@ class MainViewModel @Inject constructor(private val getRemoteTrendingMovies: Get
 
     private val _trendingMovies:MutableStateFlow<TrendingMoviesResponse?> = MutableStateFlow(null)
 
-    val trendingMovies: StateFlow<TrendingMoviesResponse?> = _trendingMovies
+    val trendingMovies:StateFlow<TrendingMoviesResponse?> = _trendingMovies
 
+    val dataSource:MutableStateFlow<DataSource> = MutableStateFlow(DataSource.Remote)
     fun getTrendingMovies(apiKey:String)
     {
         viewModelScope.launch {
@@ -29,6 +30,7 @@ class MainViewModel @Inject constructor(private val getRemoteTrendingMovies: Get
             }catch (ex:Exception)
             {
                 _trendingMovies.value =  TrendingMoviesResponse(results = getLocalTrendingMovies())
+                dataSource.value = DataSource.Local
             }
 
         }

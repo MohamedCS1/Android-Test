@@ -1,5 +1,6 @@
 package com.example.domain.models.detailMovie
 
+import android.graphics.Bitmap
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -11,6 +12,7 @@ data class DetailMovieResponse(
     @Embedded val belongs_to_collection: BelongsToCollection?,
     val budget: Int?,
     val genres: List<Genre>?,
+    val bitMapPoster: Bitmap?,
     val homepage: String?,
     @PrimaryKey val id: Int?,
     val imdb_id: String,
