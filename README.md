@@ -9,6 +9,22 @@ APY_KEY = c9856d0cb57c3f14bf75bdc6c063b8f3
 </pre>
 
 APK link -> https://drive.google.com/file/d/1E_b9a-0MPzUc55Wq8HsY8nm6AUmy2Gb9/view?usp=share_link
+# Behavior
+
+<h3>MainActivity</h3>
+
+* Start activity main
+* with mainViewModel try Load Movies from remote api 
+* on exception with mainViewModel get Movies from locale database
+* with mainViewModel try Cache Movies in local database
+* onClick movie start DetailActivity
+<h3>DetailActivity</h3>
+
+* DeatailActivity started
+* with detailViewModel try get Movie Detail from remote api 
+* on exception with detailViewModel try get Movies Detail from local database
+* with detailViewModel try Cache Movie Detail in local database
+
 
 # Tech stack
 
