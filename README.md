@@ -1,6 +1,6 @@
 # Android-Test
 
-Application that demonstrates modern Android development based on Clean Architecture
+Android application that demonstrates modern Android development based on Clean Architecture
 
 # Attension
 For build project add APY_KEY in ( local.properties ) file like below and rebuild project
