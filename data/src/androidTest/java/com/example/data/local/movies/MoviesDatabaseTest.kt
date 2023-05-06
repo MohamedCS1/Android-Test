@@ -1,4 +1,4 @@
-package com.example.data.movies
+package com.example.data.local.movies
 
 import android.content.Context
 import androidx.room.Room
@@ -9,7 +9,6 @@ import com.example.data.local.movies.MoviesDao
 import com.example.data.local.movies.MoviesDatabase
 import com.example.domain.models.trendingMovies.Movie
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import org.junit.After
